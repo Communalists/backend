@@ -7,14 +7,18 @@
   "type": "commonjs",
   "scripts": {
     "start": "tsc && node dist/app.js",
+    "prisma-pull": "prisma db pull",
+    "generate": "prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@prisma/client": "^6.3.1",
     "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
+    "prisma": "^6.3.1",
     "typescript": "^5.7.3"
   }
 }
