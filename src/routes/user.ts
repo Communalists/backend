@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
-import { User } from "../types/prisma-schema";
+import { User } from "@prisma/client";
 
 const UserRouter = Router();
 
@@ -14,8 +14,10 @@ UserRouter.get("/all", async (req, res) => {
   });
 });
 
-UserRouter.post("/create", async (req, res, next) => {
+UserRouter.post("/create", async (req, res) => {
   const { name, email } = req.body as User;
+
+  console.table({ name, email });
 
   if (!name) {
     res.status(400).send({
@@ -38,9 +40,15 @@ UserRouter.post("/create", async (req, res, next) => {
       name,
       email,
     },
-  });
-
-  res.status(200).send();
+  })
+    .then(() => {
+      console.log("SUCCESS");
+      res.status(200).send();
+    })
+    .catch(() => {
+      console.error("ERROR");
+      res.status(500).send();
+    });
 });
 
 export default UserRouter;
